@@ -39,7 +39,8 @@ var gMeme = {
             isSelected: false
         }
     ],
-    stickersOnMeme: []
+    stickersOnMeme: [],
+    isLineSelected: true
 }
 
 // That function create imgs 
@@ -99,6 +100,7 @@ function createLine() {
 
 // That function remove line
 function removeLine() {
+    if(!gMeme.isLineSelected) return
     const selectedLineIdx = gMeme.selectedLineIdx
     gMeme.lines.splice(selectedLineIdx, 1)
     if (!gMeme.lines.length) return
@@ -166,36 +168,43 @@ function setLineTxt(txt) {
 
 // That function update text size
 function updateTxtSize(diff) {
+    if(!gMeme.isLineSelected) return
     gMeme.lines[gMeme.selectedLineIdx].size += diff
 }
 
 // That function update text align on canvas
 function updateTxtAlign(align) {
+    if(!gMeme.isLineSelected) return
     gMeme.lines[gMeme.selectedLineIdx].align = align
 }
 
 // That function update text font
 function updateTxtFont(fontFamily) {
+    if(!gMeme.isLineSelected) return
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontFamily
 }
 
 // That function update the text position
 function updateTxtPos(diff) {
+    if(!gMeme.isLineSelected) return
     gMeme.lines[gMeme.selectedLineIdx].pos.y += diff
 }
 
 // That function update the text stroke color
 function updateStrokeColor(strokeColor) {
+    if(!gMeme.isLineSelected) return
     gMeme.lines[gMeme.selectedLineIdx].strokeColor = strokeColor
 }
 
 // That function update the text color
 function updateTxtColor(color) {
+    if(!gMeme.isLineSelected) return
     gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
 // That function update the selected line
 function updateSelectedLine() {
+    gMeme.isLineSelected = true
     if (gMeme.selectedLineIdx >= gMeme.lines.length - 1) {
         gMeme.lines[gMeme.selectedLineIdx].isSelected = false
         gMeme.selectedLineIdx = 0
@@ -222,6 +231,7 @@ function resetSelectedLine(){
     gMeme.lines.forEach((line, idx) => {
         gMeme.lines[idx].isSelected = false
     })
+    gMeme.isLineSelected = false
 }
 
 // That function check if sticker already on the meme
