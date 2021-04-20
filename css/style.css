@@ -6,17 +6,22 @@
 
 @font-face {
     font-family: Poppins-Light;
-    src: url('/font/Poppins-Light.ttf');
+    src: url('../font/Poppins-Light.ttf');
 }
 
 @font-face {
     font-family: Poppins-Medium;
-    src: url('/font/Poppins-Medium.ttf');
+    src: url('../font/Poppins-Medium.ttf');
 }
 
 @font-face {
     font-family: Poppins-Regular;
-    src: url('/font/Poppins-Regular.ttf');
+    src: url('../font/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(../font/Roboto-Medium.ttf);
 }
 
 /* BASE */

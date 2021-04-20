@@ -44,22 +44,22 @@
                         <img src="img/icon/arrowup.png" alt="">
                         <img src="img/icon/arrowdown.png" alt="">
                     </button>
-                    <button class="add-text-btn"><img src="img/icon/plus.png" alt=""></button>
-                    <button class="remove-text-btn"><img src="img/icon/remove.png" alt=""></button>
+                    <button class="add-text-btn" onclick="onAddLine()"><img src="img/icon/plus.png" alt=""></button>
+                    <button class="remove-text-btn" onclick="onRemoveLine()"><img src="img/icon/remove.png" alt=""></button>
                 </div>
                 <div class="text-editor flex column">
                     <div class="flex wrap">
                         <button onclick="onChangeTxtSize(1)"><img src="img/icon/a+.png" alt=""></button>
                         <button onclick="onChangeTxtSize(-1)"><img src="img/icon/a-.png" alt=""></button>
-                        <button><img src="img/icon/left.png" alt=""></button>
-                        <button><img src="img/icon/center.png" alt=""></button>
-                        <button><img src="img/icon/right.png" alt=""></button>
+                        <button onclick="onChangeTxtAlign('left')"><img src="img/icon/left.png" alt=""></button>
+                        <button onclick="onChangeTxtAlign('center')"><img src="img/icon/center.png" alt=""></button>
+                        <button onclick="onChangeTxtAlign('right')"><img src="img/icon/right.png" alt=""></button>
                     </div>
                     <div class="second-line flex wrap">
-                        <select name="font-select" value="Impact">
+                        <select name="font-select" value="Impact" onchange="onChangeTxtFont(this.value)">
                             <option value="Impact">Impact</option>
-                            <option value="Ariel">Ariel</option>
-                            <option value="Monospace">Monospace</option>
+                            <option value="Poppins-Light">Poppins</option>
+                            <option value="Roboto">Roboto</option>
                         </select>
                     </div>
                 </div>

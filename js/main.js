@@ -13,6 +13,8 @@ function onInit() {
     renderKeywords()
     // rendering imgs to the gallery
     renderGallery()
+    //Check
+    renderCanvas()
 }
 
 // That function starts the line position
@@ -72,19 +74,30 @@ function drawImg(img) {
     gCtx.drawImage(img, x, y, img.naturalWidth * scale, img.naturalHeight * scale)
 }
 
-
 // That function draw line
 function drawLine(line) {
-    gCtx.font = `${line.size}px Impact`
+    gCtx.font = `${line.size}px ${line.fontFamily}`
     gCtx.fillStyle = `${line.color}`
-    gCtx.strokeStyle = 'black'
+    gCtx.strokeStyle = line.strokeColor
     gCtx.lineWidth = 2
-    gCtx.textAlign = `${line.align}`
-    // if line is selected draw rec around the text
+    gCtx.textAlign = `center`
+    // if line is selected mark the text
     if (line.isSelected) {
         gCtx.strokeStyle = 'red'
         gCtx.restore()
     }
+    // align on the canvas 
+    const txtAlignCtx = line.align
+    if (txtAlignCtx === 'right') {
+        gCtx.fillText(line.txt, line.pos.x + (gCanvas.width - line.pos.x) / 2, line.pos.y)
+        gCtx.strokeText(line.txt, line.pos.x + (gCanvas.width - line.pos.x) / 2, line.pos.y)
+        return
+    } else if (txtAlignCtx === 'left') {
+        gCtx.fillText(line.txt, line.pos.x - (gCanvas.width - line.pos.x) / 2, line.pos.y)
+        gCtx.strokeText(line.txt, line.pos.x - (gCanvas.width - line.pos.x) / 2, line.pos.y)
+        return
+    }
+    // align center on the canvas
     gCtx.fillText(line.txt, line.pos.x, line.pos.y)
     gCtx.strokeText(line.txt, line.pos.x, line.pos.y)
 }
@@ -109,7 +122,19 @@ function onChangeTxtSize(diff) {
     renderCanvas()
 }
 
-// That function changes the text position up/down by diff
+// That function change the text align on canvas
+function onChangeTxtAlign(align){
+    updateTxtAlign(align)
+    renderCanvas()
+}
+
+// That function change the text font 
+function onChangeTxtFont(fontFamily){
+    updateTxtFont(fontFamily)
+    renderCanvas()
+}
+
+// That function change the text position up/down by diff
 function onChangeTxtPos(diff) {
     updateTxtPos(diff)
     renderCanvas()
@@ -118,6 +143,18 @@ function onChangeTxtPos(diff) {
 // That function switching between lines
 function onSwitchLine() {
     updateSelectedLine()
+    renderCanvas()
+}
+
+// That function add a new line
+function onAddLine() {
+    createLine()
+    renderCanvas()
+}
+
+// That function remove the selected line
+function onRemoveLine(){
+    removeLine()
     renderCanvas()
 }
 

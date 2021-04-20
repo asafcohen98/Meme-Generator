@@ -11,7 +11,9 @@ var gMeme = {
             txt: 'First Line',
             size: 40,
             align: 'center',
+            fontFamily: 'Impact',
             color: 'white',
+            strokeColor: 'black',
             pos: {
                 x: 0,
                 y: 0
@@ -22,7 +24,9 @@ var gMeme = {
             txt: 'Second Line',
             size: 40,
             align: 'center',
+            fontFamily: 'Impact',
             color: 'white',
+            strokeColor: 'black',
             pos: {
                 x: 0,
                 y: 0
@@ -33,15 +37,15 @@ var gMeme = {
 }
 
 // That function create imgs 
-function _createImgs(){
-    return [createImg(1,'politic'),createImg(2,'animal'),createImg(3,'funny'),createImg(4,'animal'),createImg(5,'funny'),
-        createImg(6,'funny'),createImg(7,'funny'),createImg(8,'movie'),createImg(9,'funny'),createImg(10,'politic'),
-        createImg(11,'funny'),createImg(12,'funny'),createImg(13,'movie'),createImg(14,'movie'),createImg(15,'movie'),
-        createImg(16,'movie'),createImg(17,'politic'),createImg(18,'movie')]
+function _createImgs() {
+    return [createImg(1, 'politic'), createImg(2, 'animal'), createImg(3, 'funny'), createImg(4, 'animal'), createImg(5, 'funny'),
+    createImg(6, 'funny'), createImg(7, 'funny'), createImg(8, 'movie'), createImg(9, 'funny'), createImg(10, 'politic'),
+    createImg(11, 'funny'), createImg(12, 'funny'), createImg(13, 'movie'), createImg(14, 'movie'), createImg(15, 'movie'),
+    createImg(16, 'movie'), createImg(17, 'politic'), createImg(18, 'movie')]
 }
 
 // That function create img
-function createImg(id,keyword){
+function createImg(id, keyword) {
     return {
         id,
         url: `img/${id}.jpg`,
@@ -54,14 +58,44 @@ function getLines() {
     return gMeme.lines
 }
 
+// That function create new line
+function createLine() {
+    gMeme.lines.forEach((line, idx) => {
+        gMeme.lines[idx].isSelected = false
+    })
+    const line = {
+        txt: 'New Line',
+        size: 40,
+        fontFamily: 'Impact',
+        align: 'center',
+        color: 'white',
+        strokeColor: 'black',
+        pos: {
+            x: 250,
+            y: 250
+        },
+        isSelected: true
+    }
+    gMeme.lines.push(line)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+// That function remove line
+function removeLine() {
+    const selectedLineIdx = gMeme.selectedLineIdx
+    gMeme.lines.splice(selectedLineIdx, 1)
+    gMeme.selectedLineIdx = 0
+    gMeme.lines[gMeme.selectedLineIdx].isSelected = true
+}
+
 // That function return imgs for display 
-function getImgs(){
-    if(!gFilterBy) return gImgs
+function getImgs() {
+    if (!gFilterBy) return gImgs
     return gImgs.filter(img => img.keyword.includes(gFilterBy.toLowerCase()))
 }
 
 // That function return keywords for display
-function getKeywords(){
+function getKeywords() {
     return gKeywords
 }
 
@@ -71,7 +105,7 @@ function setFirstLinesPos(firstLinePos, secLinePos) {
     gMeme.lines[0].pos.y = firstLinePos.y
     gMeme.lines[1].pos.x = secLinePos.x
     gMeme.lines[1].pos.y = secLinePos.y
- }
+}
 
 // That function get the img by user selected id
 function getSelectedImg() {
@@ -98,6 +132,16 @@ function updateTxtSize(diff) {
     gMeme.lines[gMeme.selectedLineIdx].size += diff
 }
 
+// That function update text align on canvas
+function updateTxtAlign(align) {
+    gMeme.lines[gMeme.selectedLineIdx].align = align
+}
+
+// That function update text font
+function updateTxtFont(fontFamily) {
+    gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontFamily
+}
+
 // That function update the text position
 function updateTxtPos(diff) {
     gMeme.lines[gMeme.selectedLineIdx].pos.y += diff
@@ -105,7 +149,7 @@ function updateTxtPos(diff) {
 
 // That function update the selected line
 function updateSelectedLine() {
-    if (gMeme.selectedLineIdx === gMeme.lines.length - 1) {
+    if (gMeme.selectedLineIdx >= gMeme.lines.length - 1) {
         gMeme.lines[gMeme.selectedLineIdx].isSelected = false
         gMeme.selectedLineIdx = 0
         gMeme.lines[gMeme.selectedLineIdx].isSelected = true
@@ -117,12 +161,12 @@ function updateSelectedLine() {
 }
 
 // That function set imgs filter
-function setImgsFilter(txt){
+function setImgsFilter(txt) {
     gFilterBy = txt
 }
 
 // That function update the keyword
-function updateKeyword(txt){
+function updateKeyword(txt) {
     gKeywords[txt.toLowerCase()]++
 }
 
