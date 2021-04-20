@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Meme Generator - make your own meme </title>
+</head>
+
+<body onload="onInit()">
+
+    <!-- HEADER -->
+    <header>
+        <div class="main-header container flex space-between align-center">
+            <div class="logo flex column">
+                <h1 class="meme-logo-title">Meme</h1>
+                <h1>Generator</h1>
+            </div>
+            <nav class="main-nav">
+                <ul class="flex">
+                    <li><a href="">Gallery</a></li>
+                    <li><a href="">Memes</a></li>
+                    <li><a href="">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!--  -->
+
+    <!-- MAIN -->
+    <main>
+        <!-- MEME EDITOR -->
+        <section class="meme-editor container space-between">
+            <canvas height="500" width="500"></canvas>
+            <div class="control-panel-container flex column align-center">
+                <input type="text" name="text-edit" placeholder="Enter text here" oninput="onSetTxt(this.value)">
+                <div class="lines-editor">
+                    <!-- <button onclick="onChangeTxtPos(-5)">Up</button>
+                    <button onclick="onChangeTxtPos(5)">Down</button> -->
+                    <button class="switch-line-btn" onclick="onSwitchLine()">
+                        <img src="img/icon/arrowup.png" alt="">
+                        <img src="img/icon/arrowdown.png" alt="">
+                    </button>
+                    <button class="add-text-btn"><img src="img/icon/plus.png" alt=""></button>
+                    <button class="remove-text-btn"><img src="img/icon/remove.png" alt=""></button>
+                </div>
+                <div class="text-editor flex column">
+                    <div class="flex wrap">
+                        <button onclick="onChangeTxtSize(1)"><img src="img/icon/a+.png" alt=""></button>
+                        <button onclick="onChangeTxtSize(-1)"><img src="img/icon/a-.png" alt=""></button>
+                        <button><img src="img/icon/left.png" alt=""></button>
+                        <button><img src="img/icon/center.png" alt=""></button>
+                        <button><img src="img/icon/right.png" alt=""></button>
+                    </div>
+                    <div class="second-line flex wrap">
+                        <select name="font-select" value="Impact">
+                            <option value="Impact">Impact</option>
+                            <option value="Ariel">Ariel</option>
+                            <option value="Monospace">Monospace</option>
+                        </select>
+                    </div>
+                </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="gallery container flex column">
+            <div class="filters-container flex wrap ">
+                <div class="search flex space-between">
+                    <input list="filters" name="search" type="text" placeholder="Search"
+                        oninput="onSetImgsFilter(this.value,event)">
+                    <i class="fas fa-search"></i>
+                </div>
+                <!-- FILTER LIST -->
+                <datalist id="filters">
+                    <option value="Funny">
+                    <option value="Politic">
+                    <option value="Animal">
+                    <option value="Movie">
+                </datalist>
+                <!-- KEYWORD FILTER -->
+                <div class="category-filter flex align-center wrap">
+                </div>
+            </div>
+            <div class="img-wrapper grid">
+            </div>
+        </section>
+    </main>
+
+    <!--  -->
+
+    <footer>
+
+    </footer>
+    <script src="lib/fontawesome-all.js" data-auto-replace-svg="nest"></script>
+    <script src="js/storage-service.js"></script>
+    <script src="js/meme-service.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
