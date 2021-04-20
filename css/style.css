@@ -32,10 +32,23 @@ html {
 }
 
 body {
-    margin: 0 0 0;
+    margin: 0 0 1;
     font-size: 1rem;
     overflow-x: hidden;
+    background-color: #22252C;
+    background-image: url('../img/background.png');
+    background-attachment: fixed;
+    background-origin: border-box;
+    background-blend-mode:luminosity;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+
+/* body.start-edit{
+    background-color: ;
+} */
 
 button {
     outline: none;
@@ -62,12 +75,19 @@ ul {
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 input {
     margin: 0 0 0;
     padding: 0;
     outline: none;
+}
+
+label{
+    margin: 0 0 0;
+    padding: 0;
+    outline: none;  
 }
 
 select {
@@ -151,7 +171,7 @@ header {
 }
 
 .meme-logo-title {
-    color: #22252C
+    color: #22252C;
 }
 
 .logo h1 {
@@ -164,12 +184,16 @@ header {
     color: #FFFFFF;
     font-family: Poppins-Medium;
     margin-inline-end: 3.938rem;
-    transition: color .3s;
+    padding: 0.75em 1.313em;
+    border-radius: 20rem;
+    transition: color, background-color .5s;
 }
 
 .main-nav a:hover {
-    color: #eeeeee;
-    padding: 0.2em 0;
+    color: #21AC91;
+    padding: 0.75rem 1.313rem;
+    background-color: #ffffff;
+    box-shadow:  0px 1px 4px 1px #444444;
 }
 
 .main-nav a:active {
@@ -232,6 +256,7 @@ input[name="text-edit"]::placeholder {
     border: none;
     border-radius: 30%;
     margin-inline-end: 1.313rem;
+    transition: background-color .3s;
 }
 
 .lines-editor button:first-of-type img {
@@ -253,9 +278,17 @@ input[name="text-edit"]::placeholder {
     box-shadow: inset 0px 2px 1px 1px #52BFD6, inset 0px -2px 1px 1px #048B97;
 }
 
+.switch-line-btn:hover{
+    background-color: #52BFD6;
+}
+
 .add-text-btn {
     background-color: #3CC951;
     box-shadow: inset 0px 2px 1px 1px #5ECF72, inset 0px -2px 1px 1px #015D33;
+}
+
+.add-text-btn:hover{
+    background-color: #5ECF72;
 }
 
 .remove-text-btn {
@@ -263,27 +296,39 @@ input[name="text-edit"]::placeholder {
     box-shadow: inset 0px 2px 1px 1px #EC635B, inset 0px -2px 1px 1px #8C0606;
 }
 
+.remove-text-btn:hover{
+    background-color: #EC635B ;
+}
+
 .text-editor {
     border-radius: 1rem;
     background-color: #19A59F;
     padding: 0.688rem 1rem;
+    margin-bottom: 1.625rem;
 }
 
-.text-editor button img {
+.text-editor button img, label img {
     object-fit: contain;
     object-position: center;
     width: 2.5em;
     height: 1.875em;
 }
 
-.text-editor button, select {
+.text-editor button, select,label{
     padding: 0.75rem 0.563rem;
     border: none;
     border-radius: 1rem;
+    cursor: pointer;
     background-color: #FFFFFF;
+    box-shadow: inset 0px -3px 1px 1px #3E7D7A;
+    transition: background-color .3s;
 }
 
-.text-editor button:not(:last-child) {
+.text-editor button:hover, select:hover,label:hover{
+    background-color:#e7e7e7;
+}
+
+.text-editor label, button:not(:last-child) {
     margin-inline-end: 2.063rem;
 }
 
@@ -292,9 +337,61 @@ input[name="text-edit"]::placeholder {
 }
 
 .text-editor select {
-    font-size: 1.8em;
+    font-size: 1.5em;
     text-transform: uppercase;
     padding-inline-start: 1rem;
+    padding-inline-end: 5rem;
+    margin-inline-end: 2.063rem;
+}
+
+
+.text-editor label img{
+    object-fit: contain;
+    object-position: center;
+    width: 2em;
+    height: 1.5em;
+}
+
+.text-editor label{
+    position: relative;
+}
+
+.text-editor input{
+    position:absolute;
+    top: 0%;
+    left: 3%;
+    visibility: hidden;
+}
+
+.stickers-container{
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 20rem;
+    padding: 1rem;
+    margin-bottom: 1.625rem;
+}
+
+.stickers-container .previous-btn, .next-btn{
+    background-color: transparent;
+    border: none;
+    padding: 0 0;
+    margin: 0 0;
+}
+
+.stickers-container .previous-btn{
+   margin-inline-end: 1.5em;
+}
+
+.stickers img:not(:last-of-type){
+    margin-inline-end: 1em; 
+}
+
+.stickers-container .next-btn{
+    margin-inline-start: 1.5em;
+}
+
+.stickers img{
+    cursor: pointer;
 }
 
 /* Gallery */

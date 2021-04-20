@@ -1,5 +1,4 @@
 'use strict'
-
 var gCanvas
 var gCtx
 
@@ -13,8 +12,6 @@ function onInit() {
     renderKeywords()
     // rendering imgs to the gallery
     renderGallery()
-    //Check
-    renderCanvas()
 }
 
 // That function starts the line position
@@ -42,6 +39,15 @@ function renderGallery() {
     document.querySelector('.img-wrapper').innerHTML = strHtmls.join('')
 }
 
+// That function render stickers for the meme editor
+function renderStickers() {
+    const stickers = getStickers()
+    const strHtmls = stickers.map(sticker => {
+        return `<img src="${sticker.url}" alt="" onclick="onSetSticker(${sticker.id})">`
+    })
+    document.querySelector('.stickers').innerHTML = strHtmls.join('')
+}
+
 // That function render the keywords filter
 function renderKeywords() {
     const keywords = getKeywords()
@@ -64,6 +70,8 @@ function renderCanvas() {
         const lines = getLines()
         lines.forEach(line => { drawLine(line) })
     }
+    const stickers = getMemeStickers()
+    if (stickers.length) stickers.forEach(sticker => { drawSticker(sticker) })
 }
 
 // That function draw img on canvas
@@ -72,6 +80,15 @@ function drawImg(img) {
     const x = (gCanvas.width / 2) - (img.naturalWidth / 2) * scale;
     const y = (gCanvas.height / 2) - (img.naturalHeight / 2) * scale;
     gCtx.drawImage(img, x, y, img.naturalWidth * scale, img.naturalHeight * scale)
+}
+
+// That function draw sticker on canvas
+function drawSticker(sticker) {
+    const img = new Image()
+    img.src = sticker.url
+    img.onload = () => {
+        gCtx.drawImage(img, sticker.pos.x, sticker.pos.y, img.naturalWidth, img.naturalHeight)
+    }
 }
 
 // That function draw line
@@ -108,9 +125,10 @@ function onSetTxt(txt) {
     renderCanvas()
 }
 
-// That function change canvas img by user 
+// That function select img for canvas by user 
 function onSelectedImg(imgId) {
     setSelectedImg(imgId)
+    renderStickers()
     renderCanvas()
     document.querySelector('.gallery').style.display = 'none'
     document.querySelector('.meme-editor').style.display = 'flex'
@@ -123,13 +141,13 @@ function onChangeTxtSize(diff) {
 }
 
 // That function change the text align on canvas
-function onChangeTxtAlign(align){
+function onChangeTxtAlign(align) {
     updateTxtAlign(align)
     renderCanvas()
 }
 
 // That function change the text font 
-function onChangeTxtFont(fontFamily){
+function onChangeTxtFont(fontFamily) {
     updateTxtFont(fontFamily)
     renderCanvas()
 }
@@ -137,6 +155,18 @@ function onChangeTxtFont(fontFamily){
 // That function change the text position up/down by diff
 function onChangeTxtPos(diff) {
     updateTxtPos(diff)
+    renderCanvas()
+}
+
+// That function change text stroke color 
+function onChangeTxtStroke(strokeColor) {
+    updateStrokeColor(strokeColor)
+    renderCanvas()
+}
+
+// That function change text fill color
+function onChangeTxtColor(color) {
+    updateTxtColor(color)
     renderCanvas()
 }
 
@@ -153,7 +183,7 @@ function onAddLine() {
 }
 
 // That function remove the selected line
-function onRemoveLine(){
+function onRemoveLine() {
     removeLine()
     renderCanvas()
 }
@@ -167,4 +197,24 @@ function onSetImgsFilter(txt, ev) {
     setImgsFilter(txt)
     renderGallery()
 }
+
+// That function set sticker on canvas
+function onSetSticker(stickerId) {
+    setSelectedSticker(stickerId)
+    renderCanvas()
+}
+
+// That function download the meme
+function downloadMeme(elLink) {
+    var imgContent = gCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
+
+// That function clear the selected line 
+function onClearSelectedLine(){
+    resetSelectedLine()
+    renderCanvas()
+}
+
+
 

@@ -35,7 +35,9 @@
     <main>
         <!-- MEME EDITOR -->
         <section class="meme-editor container space-between">
-            <canvas height="500" width="500"></canvas>
+            <div class="canvas-container" onclick="onClearSelectedLine()">
+                <canvas height="500" width="500" ></canvas>
+            </div>
             <div class="control-panel-container flex column align-center">
                 <input type="text" name="text-edit" placeholder="Enter text here" oninput="onSetTxt(this.value)">
                 <div class="lines-editor">
@@ -46,9 +48,10 @@
                         <img src="img/icon/arrowdown.png" alt="">
                     </button>
                     <button class="add-text-btn" onclick="onAddLine()"><img src="img/icon/plus.png" alt=""></button>
-                    <button class="remove-text-btn" onclick="onRemoveLine()"><img src="img/icon/remove.png" alt=""></button>
+                    <button class="remove-text-btn" onclick="onRemoveLine()"><img src="img/icon/remove.png"
+                            alt=""></button>
                 </div>
-                <div class="text-editor flex column">
+                <div class="text-editor flex column space-between">
                     <div class="flex wrap">
                         <button onclick="onChangeTxtSize(1)"><img src="img/icon/a+.png" alt=""></button>
                         <button onclick="onChangeTxtSize(-1)"><img src="img/icon/a-.png" alt=""></button>
@@ -56,13 +59,32 @@
                         <button onclick="onChangeTxtAlign('center')"><img src="img/icon/center.png" alt=""></button>
                         <button onclick="onChangeTxtAlign('right')"><img src="img/icon/right.png" alt=""></button>
                     </div>
-                    <div class="second-line flex wrap">
+                    <div class="second-line flex">
                         <select name="font-select" value="Impact" onchange="onChangeTxtFont(this.value)">
                             <option value="Impact">Impact</option>
                             <option value="Poppins-Light">Poppins</option>
                             <option value="Roboto">Roboto</option>
                         </select>
+                        <label for="stroke-input"><img src="img/icon/s.png" alt="">
+                            <input id="stroke-input" type="color" onchange="onChangeTxtStroke(this.value)">
+                        </label>
+                        <label for="color-input"><img src="img/icon/color.png" alt="">
+                            <input id="color-input" type="color" onchange="onChangeTxtColor(this.value)">
+                        </label>
+
                     </div>
+                </div>
+                <!-- STICKERS CONTAINER -->
+                <div class="stickers-container flex">
+                    <button class="previous-btn"><img src="img/icon/previous.png" alt=""></button>
+                    <div class="stickers">
+                    </div>
+                    <button class="next-btn"><img src="img/icon/next.png" alt=""></button>
+                </div>
+                <!-- DOWNLOAD/SHARE -->
+                <div class="share-container">
+                    <button>Share</button>
+                    <a href="#" class="btn" onclick="downloadMeme(this)" download="my-meme.jpg">Download</a>
                 </div>
         </section>
 
