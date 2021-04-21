@@ -12,6 +12,9 @@ function onInit() {
     renderKeywords()
     // rendering imgs to the gallery
     renderGallery()
+    // ceceasa
+    renderStickers()
+    renderCanvas()
 }
 
 // That function starts the line position
@@ -36,7 +39,7 @@ function renderGallery() {
         <img data-id="${img.id}" src=${img.url} alt="No img here" onclick="onSelectedImg(this.dataset.id)">
     </div>`
     })
-    document.querySelector('.img-wrapper').innerHTML = strHtmls.join('')
+    document.querySelector('.main-gallery .img-wrapper').innerHTML = strHtmls.join('')
 }
 
 // That function render stickers for the meme editor
@@ -72,6 +75,26 @@ function renderCanvas() {
     }
     const stickers = getMemeStickers()
     if (stickers.length) stickers.forEach(sticker => { drawSticker(sticker) })
+}
+
+// That function render the saved memes 
+function renderSavedMemes(){
+    document.querySelector('.main-gallery').style.display = 'none'
+    document.querySelector('.meme-editor').style.display = 'none'
+    document.querySelector('.memes-tab').style.display = 'flex'
+    const memes = getSavedMemes()
+    if(!memes || memes === null){
+        document.querySelector('.memes-tab h1').innerText = 'NO MEMES FOR SHOW'
+        return
+    }
+    const strHtmls = memes.map(meme =>{
+        return ` <div class="img-card">
+        <a href="#" class="btn" onclick="downloadMeme(this)" download="my-meme.jpg">
+        <img src=${meme} alt="No img here">
+        </a>
+    </div>`
+    })
+    document.querySelector('.memes-tab .img-wrapper').innerHTML = strHtmls.join('')
 }
 
 // That function draw img on canvas
@@ -204,17 +227,24 @@ function onSetSticker(stickerId) {
     renderCanvas()
 }
 
+// That function clear the selected line 
+function onClearSelectedLine(){
+    resetSelectedLine()
+    renderCanvas()
+}
+
 // That function download the meme
 function downloadMeme(elLink) {
     var imgContent = gCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
 }
 
-// That function clear the selected line 
-function onClearSelectedLine(){
-    resetSelectedLine()
-    renderCanvas()
+// That function save the meme 
+function onSaveMeme(){
+   const currMeme =  gCanvas.toDataURL('image/jpeg')
+   saveMemeToStorage(currMeme)
 }
+
 
 
 

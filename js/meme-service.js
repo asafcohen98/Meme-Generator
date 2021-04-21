@@ -1,5 +1,7 @@
 'use strict'
 
+const MEME_DB_KEY = 'memeDB'
+
 var gKeywords = { 'funny': 16, 'politic': 18, 'animal': 14, 'movie': 20 }
 
 var gImgs = _createImgs()
@@ -238,6 +240,24 @@ function resetSelectedLine(){
 function checkStickerOnMeme(sticker){
     return gMeme.stickersOnMeme.some(currSticker => sticker.id === currSticker.id)
 }
+
+// That function save meme img to storage
+function saveMemeToStorage(currMeme){
+    var memes  = loadFromStorage(MEME_DB_KEY)
+    if(!memes || memes === null){
+        var memes =[currMeme]
+        saveToStorage(MEME_DB_KEY, memes)
+        return
+    }
+    memes.push(currMeme)
+    saveToStorage(MEME_DB_KEY, memes)
+}
+
+// That function get saved memes to display
+function getSavedMemes(){
+    return loadFromStorage(MEME_DB_KEY)
+}
+
 
 
 

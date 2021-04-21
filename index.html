@@ -22,8 +22,7 @@
             <nav class="main-nav">
                 <ul class="flex">
                     <li><a href="">Gallery</a></li>
-                    <li><a href="">Memes</a></li>
-                    <li><a href="">About</a></li>
+                    <li onclick="renderSavedMemes()"><a href="#">Memes</a></li>
                 </ul>
             </nav>
         </div>
@@ -81,15 +80,30 @@
                     </div>
                     <button class="next-btn"><img src="img/icon/next.png" alt=""></button>
                 </div>
-                <!-- DOWNLOAD/SHARE -->
-                <div class="share-container">
-                    <button>Share</button>
-                    <a href="#" class="btn" onclick="downloadMeme(this)" download="my-meme.jpg">Download</a>
+                <!-- DOWNLOAD/SHARE/SAVE -->
+                <div class="share-container flex column align-center">
+                    <div class="share-form">
+                        <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                            <input name="img" id="imgData" type="hidden" />
+                            <div class="share-link">
+                                <button class="publish-btn" type="submit">Publish</button>
+                            </div>
+                          </form>
+                    </div>
+                    <a href="#" class="download-btn" onclick="downloadMeme(this)" download="my-meme.jpg">
+                        <i class="fas fa-download"></i>
+                        Download
+                    </a>
+                    <button class="save-btn" onclick="onSaveMeme()">
+                        <i class="fas fa-save"></i>
+                        Save on memes
+                    </button>
                 </div>
         </section>
 
         <!-- GALLERY -->
-        <section class="gallery container flex column">
+
+        <section class="main-gallery gallery container flex column" >
             <div class="filters-container flex wrap ">
                 <div class="search flex space-between">
                     <input list="filters" name="search" type="text" placeholder="Search"
@@ -114,11 +128,33 @@
 
     <!--  -->
 
+    <!-- MEME TAB -->
+    <section class="memes-tab gallery container flex column" style="display: none;">
+        <div class="header flex center">
+            <h1>Memes</h1>
+        </div>
+        <div class="img-wrapper grid">
+        </div>
+
+
+    </section>
+
     <footer>
+        <div class="main-footer container flex column align-center">
+            <div class="logo">
+                <h1 class="meme-logo-title">Meme</h1>
+                <h1>Generator</h1>
+            </div>
+            <a class="github-link" href="https://github.com/asafcohen98" target="_blank">
+            <i class="fab fa-github"></i></a>
+               <small>copyright © 2021</small>
+        </div>
+
 
     </footer>
-    <script src="lib/fontawesome-all.js" data-auto-replace-svg="nest"></script>
     <script src="js/storage-service.js"></script>
+    <script src="js/upload-service.js"></script>
+    <script src="lib/fontawesome-all.js" data-auto-replace-svg="nest"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/main.js"></script>
 </body>
