@@ -12,6 +12,9 @@
 
 <body onload="onInit()">
 
+     <!-- SCREEN OVERLAY MOBILE -->
+     <div class="main-screen" onclick="toggleMenu()"></div>
+
     <!-- HEADER -->
     <header>
         <div class="main-header container flex space-between align-center">
@@ -19,12 +22,16 @@
                 <h1 class="meme-logo-title">Meme</h1>
                 <h1>Generator</h1>
             </div>
-            <nav class="main-nav">
+            <nav class="main-nav flex align-center">
                 <ul class="flex">
                     <li><a href="">Gallery</a></li>
                     <li onclick="renderSavedMemes()"><a href="#">Memes</a></li>
                 </ul>
             </nav>
+            <div onclick="toggleMenu()" class="menu-btn">
+                <div class="menu-btn-burger">
+                </div>
+            </div>
         </div>
     </header>
 
@@ -34,14 +41,12 @@
     <main>
         <!-- MEME EDITOR -->
         <section class="meme-editor container space-between">
-            <div class="canvas-container" onclick="onClearSelectedLine()">
-                <canvas height="500" width="500" ></canvas>
+            <div class="canvas-container">
+                <canvas height="500" width="500"></canvas>
             </div>
             <div class="control-panel-container flex column align-center">
                 <input type="text" name="text-edit" placeholder="Enter text here" oninput="onSetTxt(this.value)">
                 <div class="lines-editor">
-                    <!-- <button onclick="onChangeTxtPos(-5)">Up</button>
-                    <button onclick="onChangeTxtPos(5)">Down</button> -->
                     <button class="switch-line-btn" onclick="onSwitchLine()">
                         <img src="img/icon/arrowup.png" alt="">
                         <img src="img/icon/arrowdown.png" alt="">
@@ -53,10 +58,10 @@
                 <div class="text-editor flex column space-between">
                     <div class="flex wrap">
                         <button onclick="onChangeTxtSize(1)"><img src="img/icon/a+.png" alt=""></button>
-                        <button onclick="onChangeTxtSize(-1)"><img src="img/icon/a-.png" alt=""></button>
-                        <button onclick="onChangeTxtAlign('left')"><img src="img/icon/left.png" alt=""></button>
-                        <button onclick="onChangeTxtAlign('center')"><img src="img/icon/center.png" alt=""></button>
-                        <button onclick="onChangeTxtAlign('right')"><img src="img/icon/right.png" alt=""></button>
+                        <button   onclick="onChangeTxtSize(-1,event)"><img src="img/icon/a-.png" alt=""></button>
+                        <button  onclick="onChangeTxtAlign('left')"><img src="img/icon/left.png" alt=""></button>
+                        <button  onclick="onChangeTxtAlign('center')"><img src="img/icon/center.png" alt=""></button>
+                        <button  onclick="onChangeTxtAlign('right')"><img src="img/icon/right.png" alt=""></button>
                     </div>
                     <div class="second-line flex">
                         <select name="font-select" value="Impact" onchange="onChangeTxtFont(this.value)">
@@ -90,6 +95,7 @@
                             </div>
                           </form>
                     </div>
+                    <div class="flex space-between">
                     <a href="#" class="download-btn" onclick="downloadMeme(this)" download="my-meme.jpg">
                         <i class="fas fa-download"></i>
                         Download
@@ -98,6 +104,8 @@
                         <i class="fas fa-save"></i>
                         Save on memes
                     </button>
+                </div>
+                </div>
                 </div>
         </section>
 
@@ -140,7 +148,7 @@
     </section>
 
     <footer>
-        <div class="main-footer container flex column align-center">
+        <div class="main-footer container flex  align-center">
             <div class="logo">
                 <h1 class="meme-logo-title">Meme</h1>
                 <h1>Generator</h1>

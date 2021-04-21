@@ -1,5 +1,18 @@
 'use strict'
 
+// That function download the meme
+function downloadMeme(elLink) {
+    var imgContent = gCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
+
+// That function save the meme 
+function onSaveMeme() {
+    const currMeme = gCanvas.toDataURL('image/jpeg')
+    saveMemeToStorage(currMeme)
+}
+
+// SHARE FUNCTION
 // on submit call to this function
 function uploadImg(elForm, ev) {
     ev.preventDefault();
@@ -20,7 +33,6 @@ function uploadImg(elForm, ev) {
 
 function doUploadImg(elForm, onSuccess) {
     var formData = new FormData(elForm);
-    console.log('doUploadImg -> formData', formData)
     fetch('//ca-upload.com/here/upload.php', {
         method: 'POST',
         body: formData
@@ -33,3 +45,4 @@ function doUploadImg(elForm, onSuccess) {
             console.error(err)
         })
 }
+////
