@@ -1,0 +1,257 @@
+/* Meme editor */
+
+.meme-editor {
+    display: none;
+    height: 100%;
+}
+
+.canvas-container {
+    height: 500px;
+    width: 500px;
+}
+
+canvas {
+    border-radius: 1rem;
+    border: 0.375rem solid #363941c0;
+}
+
+.control-panel-container {
+    background-color: #383B42;
+    padding: 1.5rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: inset 0px -3px 1px 1px #3f3f3f;
+}
+
+input[name="text-edit"] {
+    border: none;
+    border-radius: 2rem;
+    font-family: Poppins-Medium;
+    text-transform: uppercase;
+    font-size: 1.188rem;
+    color: #3D3D3D;
+    background-color: #EBEEF3;
+    box-shadow: inset -2px 4px 1px 1px #ffffff, inset 0px -3px 1px 1px #c8cfda;
+    padding: 1.313rem 8rem;
+    margin-bottom: 1.063rem;
+}
+
+input[name="text-edit"]::placeholder {
+    text-align: center;
+}
+
+.fas {
+    font-family: font-awesome-solid;
+    font-size: 1rem;
+}
+
+.fas.search-logo::before {
+    content: "\f002";
+    color: white;
+}
+
+.lines-editor {
+    margin-bottom: 1.625rem;
+}
+
+.lines-editor button {
+    padding: 0.75rem 0.563rem;
+    border: none;
+    border-radius: 30%;
+    transition: background-color .3s;
+}
+
+.lines-editor button:not(:last-of-type) {
+    margin-inline-end: 1.313rem;
+}
+
+.lines-editor button:first-of-type img {
+    object-fit: contain;
+    object-position: center;
+    width: 1.25em;
+    height: 1.875em;
+}
+
+.lines-editor button img {
+    object-fit: contain;
+    object-position: center;
+    width: 2.5em;
+    height: 1.875em;
+}
+
+.switch-line-btn {
+    background-color: #3FB0CE;
+    box-shadow: inset 0px 2px 1px 1px #52BFD6, inset 0px -2px 1px 1px #048B97;
+}
+
+.switch-line-btn:hover {
+    background-color: #52BFD6;
+}
+
+.add-text-btn {
+    background-color: #3CC951;
+    box-shadow: inset 0px 2px 1px 1px #5ECF72, inset 0px -2px 1px 1px #015D33;
+}
+
+.add-text-btn:hover {
+    background-color: #5ECF72;
+}
+
+.remove-text-btn {
+    background-color: #E43D36;
+    box-shadow: inset 0px 2px 1px 1px #EC635B, inset 0px -2px 1px 1px #8C0606;
+}
+
+.remove-text-btn:hover {
+    background-color: #EC635B;
+}
+
+.text-editor {
+    border-radius: 1rem;
+    background-color: #19A59F;
+    grid-template-columns: repeat(5, 50px);
+    grid-gap: 1.125rem 2.063rem;
+    padding: 0.688rem 1.125rem;
+    margin-bottom: 1.313rem;
+}
+
+.text-editor button img, label img {
+    object-fit: contain;
+    object-position: center;
+    width: 2.5em;
+    height: 1.875em;
+}
+
+.text-editor button, .text-editor label {
+    padding: 0.75rem 0.563rem;
+}
+
+.text-editor button,.text-editor select,.text-editor label {
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    box-shadow: inset 0px -3px 1px 1px #3E7D7A;
+    transition: background-color .3s;
+}
+
+.text-editor button:hover, .text-editor select:hover, .text-editor label:hover {
+    background-color: #e7e7e7;
+}
+
+.text-editor select {
+    grid-column: 1 / 4;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    padding-inline-start: 2.25rem;
+}
+
+.text-editor label img {
+    object-fit: contain;
+    object-position: center;
+    width: 2em;
+    height: 1.5em;
+}
+
+.text-editor label {
+    position: relative;
+}
+
+.text-editor input {
+    position: absolute;
+    top: 0%;
+    left: 3%;
+    visibility: hidden;
+}
+
+.stickers-container {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 20rem;
+    padding: 1rem;
+    margin-bottom: 1.625rem;
+    flex-grow: 1;
+}
+
+.stickers-container .previous-btn, .next-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0 0;
+    margin: 0 0;
+}
+
+.stickers-container .previous-btn {
+    margin-inline-end: 1.5em;
+}
+
+.stickers img:not(:last-of-type) {
+    margin-inline-end: 1em;
+}
+
+.stickers-container .next-btn {
+    margin-inline-start: 1.5em;
+}
+
+.stickers img {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+}
+
+.share-container button, a {
+    color: #ffffff;
+    font-family: Poppins-Medium;
+    font-size: 1em;
+    text-align: center;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 30rem;
+    transition: background-color .3s;
+    text-transform: uppercase;
+}
+
+.publish-btn {
+    background-color: #93edeb;
+    box-shadow: inset 0px 2px 1px 1px #bdfbfa, inset 0px -2px 1px 1px #76d6d5;
+}
+
+.publish-btn:hover {
+    background-color: #bdfbfa;
+}
+
+.facebook-share-btn {
+    background-color: #3b5998;
+    box-shadow: inset 0px 2px 1px 1px #5675b8, inset 0px -2px 1px 1px #2e54a5;
+}
+
+.facebook-share-btn:hover {
+    background-color: #5675b8;
+}
+
+.fa-facebook {
+    color: #ffffff;
+}
+
+.download-btn {
+    background-color: #8F44BB;
+    box-shadow: inset 0px 2px 1px 1px #B97BD6, inset 0px -2px 1px 1px #632687;
+    margin-top: 1em;
+    margin-inline-end: 1em;
+}
+
+.download-btn:hover {
+    background-color: #B97BD6;
+}
+
+.save-btn {
+    margin-top: 1em;
+    background-color: #3552f5;
+    box-shadow: inset 0px 2px 1px 1px #4561ff, inset 0px -2px 1px 1px #2946e9;
+}
+
+.save-btn:hover {
+    background-color: #5e75fb;
+}
+
+.saved-meme-modal{
+    background-color: blueviolet;
+}

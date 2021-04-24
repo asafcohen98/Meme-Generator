@@ -1,8 +1,10 @@
 'use strict'
 
 // That function download the meme
-function downloadMeme(elLink) {
-    var imgContent = gCanvas.toDataURL('image/jpeg')
+function downloadMeme(elLink, imgContent = null) {
+    if (!imgContent) {
+        imgContent = gCanvas.toDataURL('image/jpeg')
+    }
     elLink.href = imgContent
 }
 
@@ -10,9 +12,14 @@ function downloadMeme(elLink) {
 function onSaveMeme() {
     const currMeme = gCanvas.toDataURL('image/jpeg')
     saveMemeToStorage(currMeme)
+    const saveBtnTxt = document.querySelector('.save-btn').innerHTML
+    document.querySelector('.save-btn').innerText = 'Successfully saved'
+    setTimeout(() => {
+        document.querySelector('.save-btn').innerHTML = saveBtnTxt
+    }, 2000)
 }
 
-// SHARE FUNCTION
+// That function share the meme
 // on submit call to this function
 function uploadImg(elForm, ev) {
     ev.preventDefault();
@@ -46,4 +53,5 @@ function doUploadImg(elForm, onSuccess) {
             console.error(err)
         })
 }
-////
+
+// //

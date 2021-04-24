@@ -12,8 +12,8 @@
 
 <body onload="onInit()">
 
-     <!-- SCREEN OVERLAY MOBILE -->
-     <div class="main-screen" onclick="toggleMenu()"></div>
+    <!-- SCREEN OVERLAY MOBILE -->
+    <div class="main-screen" onclick="toggleMenu()"></div>
 
     <!-- HEADER -->
     <header>
@@ -24,7 +24,7 @@
             </div>
             <nav class="main-nav flex align-center">
                 <ul class="flex">
-                    <li><a href="">Gallery</a></li>
+                    <li onclick="renderGallery()"><a href="">Gallery</a></li>
                     <li onclick="renderSavedMemes()"><a href="#">Memes</a></li>
                 </ul>
             </nav>
@@ -42,11 +42,12 @@
         <!-- MEME EDITOR -->
         <section class="meme-editor container space-between">
             <div class="canvas-container">
-                <canvas height="500" width="500"></canvas>
+                <canvas height="0" height="0"></canvas>
             </div>
+            <!--  CONTROL PANEL -->
             <div class="control-panel-container flex column align-center">
-                <input type="text" name="text-edit" placeholder="Enter text here" oninput="onSetTxt(this.value)">
-                <div class="lines-editor">
+                <input type="text" name="text-edit" placeholder="Enter text here" oninput="onSetTxt(this.value)" onfocus="this.value=''" onblur="this.value=this.placeholder">
+                <div class="lines-editor flex">
                     <button class="switch-line-btn" onclick="onSwitchLine()">
                         <img src="img/icon/arrowup.png" alt="">
                         <img src="img/icon/arrowdown.png" alt="">
@@ -55,15 +56,12 @@
                     <button class="remove-text-btn" onclick="onRemoveLine()"><img src="img/icon/remove.png"
                             alt=""></button>
                 </div>
-                <div class="text-editor flex column space-between">
-                    <div class="flex wrap">
-                        <button onclick="onChangeTxtSize(1)"><img src="img/icon/a+.png" alt=""></button>
-                        <button   onclick="onChangeTxtSize(-1,event)"><img src="img/icon/a-.png" alt=""></button>
-                        <button  onclick="onChangeTxtAlign('left')"><img src="img/icon/left.png" alt=""></button>
-                        <button  onclick="onChangeTxtAlign('center')"><img src="img/icon/center.png" alt=""></button>
-                        <button  onclick="onChangeTxtAlign('right')"><img src="img/icon/right.png" alt=""></button>
-                    </div>
-                    <div class="second-line flex">
+                <div class="text-editor grid">
+                        <button data-id="size" value="5" onclick="onChangeTxtProp(this.dataset.id,this.value)"><img src="img/icon/a+.png" alt=""></button>
+                        <button data-id="size" value="-5" onclick="onChangeTxtProp(this.dataset.id,this.value)"><img src="img/icon/a-.png" alt=""></button>
+                        <button data-id="align" value="left" onclick="onChangeTxtProp(this.dataset.id,this.value)"><img src="img/icon/left.png" alt=""></button>
+                        <button data-id="align" value="center" onclick="onChangeTxtProp(this.dataset.id,this.value)"><img src="img/icon/center.png" alt=""></button>
+                        <button data-id="align" value="right" onclick="onChangeTxtProp(this.dataset.id,this.value)"><img src="img/icon/right.png" alt=""></button>
                         <select name="font-select" value="Impact" onchange="onChangeTxtFont(this.value)">
                             <option value="Impact">Impact</option>
                             <option value="Poppins-Light">Poppins</option>
@@ -75,13 +73,11 @@
                         <label for="color-input"><img src="img/icon/color.png" alt="">
                             <input id="color-input" type="color" onchange="onChangeTxtColor(this.value)">
                         </label>
-
-                    </div>
                 </div>
                 <!-- STICKERS CONTAINER -->
                 <div class="stickers-container flex">
                     <button class="previous-btn"><img src="img/icon/previous.png" alt=""></button>
-                    <div class="stickers">
+                    <div class="stickers flex">
                     </div>
                     <button class="next-btn"><img src="img/icon/next.png" alt=""></button>
                 </div>
@@ -93,25 +89,25 @@
                             <div class="share-link">
                                 <button class="publish-btn" type="submit">Publish</button>
                             </div>
-                          </form>
+                        </form>
                     </div>
-                    <div class="flex space-between">
-                    <a href="#" class="download-btn" onclick="downloadMeme(this)" download="my-meme.jpg">
-                        <i class="fas fa-download"></i>
-                        Download
-                    </a>
-                    <button class="save-btn" onclick="onSaveMeme()">
-                        <i class="fas fa-save"></i>
-                        Save on memes
-                    </button>
+                    <div class="download-save-btns flex center">
+                        <a href="#" class="download-btn" onclick="downloadMeme(this)" download="my-meme.jpg">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </a>
+                        <button class="save-btn" onclick="onSaveMeme()">
+                            <i class="fas fa-save"></i>
+                            Save on memes
+                        </button>
+                    </div>
                 </div>
-                </div>
-                </div>
+            </div>
         </section>
 
         <!-- GALLERY -->
 
-        <section class="main-gallery gallery container flex column" >
+        <section class="main-gallery gallery container flex column">
             <div class="filters-container flex wrap ">
                 <div class="search flex space-between">
                     <input list="filters" name="search" type="text" placeholder="Search"
@@ -128,6 +124,12 @@
                 <!-- KEYWORD FILTER -->
                 <div class="category-filter flex align-center wrap">
                 </div>
+            </div>
+               <!-- UPLOAD FILE -->
+               <div class="upload-file flex align-center">
+                <label class="upload-img-btn" for="upload-img">Upload your image
+                    <input id="upload-img" type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+                </label>
             </div>
             <div class="img-wrapper grid">
             </div>
@@ -148,22 +150,29 @@
     </section>
 
     <footer>
-        <div class="main-footer container flex  align-center">
+        <div class="main-footer container flex align-center">
             <div class="logo">
                 <h1 class="meme-logo-title">Meme</h1>
                 <h1>Generator</h1>
             </div>
             <a class="github-link" href="https://github.com/asafcohen98" target="_blank">
-            <i class="fab fa-github"></i></a>
-               <small>copyright © 2021</small>
+                <i class="fab fa-github"></i></a>
+            <small>copyright © 2021</small>
         </div>
 
 
     </footer>
+
+  <!-- JS LOADING -->
+    <script src="lib/fontawesome-all.js" data-auto-replace-svg="nest"></script>
     <script src="js/storage-service.js"></script>
     <script src="js/upload-service.js"></script>
-    <script src="lib/fontawesome-all.js" data-auto-replace-svg="nest"></script>
+    <script src="js/canvas-service.js"></script>
     <script src="js/meme-service.js"></script>
+    <script src="js/gallery-service.js"></script>
+    <script src="js/memes-tab-controller.js"></script>
+    <script src="js/meme-editor-controller.js"></script>
+    <script src="js/gallery-controller.js"></script>
     <script src="js/main.js"></script>
 </body>
 

@@ -1,0 +1,49 @@
+/* MEMES TAB */
+
+.memes-tab {
+    height: 100%;
+}
+
+.memes-tab .img-item img:hover .memes-tab .header {
+    margin-bottom: 4.063rem;
+}
+
+.memes-tab h1 {
+    font-size: 3.75rem;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: Poppins-Medium;
+}
+
+.memes-tab .img-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding-right: 1rem;
+}
+
+.memes-tab .img-card {
+    position: relative;
+}
+
+.memes-tab .remove-saved-meme-btn {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    font-size: 2em;
+    top: 5%;
+    right: 5%;
+    color: #FFFFFF;
+}
+
+.memes-tab .download-saved-meme-btn {
+    position: absolute;
+    padding: 0.2em 1em;
+    bottom: 5%;
+    left: 5%;
+    background-color: #25272cfa;
+    color: #FFFFFF;
+    transition: color 0.3s;
+}
+
+.memes-tab .download-saved-meme-btn:hover {
+    color: #87898D;
+}

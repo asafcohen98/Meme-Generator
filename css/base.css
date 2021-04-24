@@ -1,4 +1,7 @@
 /* BASE */
+* {
+    box-sizing: border-box;
+}
 
 html {
     font-family: Poppins-Light, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -62,4 +65,46 @@ label {
 select {
     cursor: pointer;
     outline: none;
+}
+
+/* Scrollbar design */
+
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+    padding: 0 0;
+    margin: 0 0 0;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(15, 155, 179);
+    background: linear-gradient(180deg, rgba(15, 155, 179, 1) 10%, rgba(48, 187, 114, 1) 72%);
+    border: 0px none #ffffff;
+    border-radius: 31px;
+}
+
+::-webkit-scrollbar-track {
+    background: #22252C;
+    border: 0px none;
+    border-radius: 27px;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Selection design */
+
+input::selection {
+    color: black;
+    background-color: rgb(124, 124, 124);
+}
+
+body * :not(input)::selection {
+    background-color: transparent;
 }

@@ -1,0 +1,55 @@
+/* Main header */
+
+header {
+    background: rgb(15, 155, 179);
+    background: linear-gradient(90deg, rgba(15, 155, 179, 1) 10%, rgba(48, 187, 114, 1) 72%);
+    border-radius: 20rem;
+    margin-bottom: 1.25rem;
+    margin-top: 1rem;
+}
+
+.main-header {
+    height: 74px;
+}
+
+.main-nav {
+    height: 100%;
+}
+
+.main-header nav .logo {
+    color: #FFFFFF;
+    font-family: Poppins-Medium;
+    font-size: 1.2rem;
+}
+
+.logo h1:not(.meme-logo-title) {
+    color: #FFFFFF;
+}
+
+.meme-logo-title {
+    color: #22252C;
+}
+
+.logo h1 {
+    font-family: Poppins-Medium;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.main-nav a {
+    color: #FFFFFF;
+    font-family: Poppins-Medium;
+    margin-inline-end: 1em;
+    border-radius: 20rem;
+    transition: color, background-color .5s;
+}
+
+.main-nav a:hover {
+    color: #21AC91;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 4px 1px #444444;
+}
+
+.main-nav a:active {
+    color: #000000;
+}

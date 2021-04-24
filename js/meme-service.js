@@ -2,13 +2,7 @@
 
 const MEME_DB_KEY = 'memeDB'
 
-var gKeywords = { 'funny': 16, 'politic': 18, 'animal': 14, 'movie': 20 }
-
-var gImgs = _createImgs()
-
 var gStickers = _createStickers()
-
-var gFilterBy = ''
 
 var gMeme = {
     selectedImgId: 1,
@@ -44,13 +38,6 @@ var gMeme = {
     stickersOnMeme: [],
 }
 
-// That function create imgs 
-function _createImgs() {
-    return [createImg(1, 'politic'), createImg(2, 'animal'), createImg(3, 'funny'), createImg(4, 'animal'), createImg(5, 'funny'),
-    createImg(6, 'funny'), createImg(7, 'funny'), createImg(8, 'movie'), createImg(9, 'funny'), createImg(10, 'politic'),
-    createImg(11, 'funny'), createImg(12, 'funny'), createImg(13, 'movie'), createImg(14, 'movie'), createImg(15, 'movie'),
-    createImg(16, 'movie'), createImg(17, 'politic'), createImg(18, 'movie')]
-}
 
 // That function create stickers
 function _createStickers() {
@@ -63,15 +50,6 @@ function _createStickers() {
 // That function get stickers for canvas
 function getMemeStickers() {
     return gMeme.stickersOnMeme
-}
-
-// That function create img
-function createImg(id, keyword) {
-    return {
-        id,
-        url: `img/${id}.jpg`,
-        keyword
-    }
 }
 
 // That function return lines for display
@@ -108,20 +86,9 @@ function removeLine() {
     gMeme.lines[gMeme.selectedLineIdx].isSelected = true
 }
 
-// That function return imgs for display 
-function getImgs() {
-    if (!gFilterBy) return gImgs
-    return gImgs.filter(img => img.keyword.includes(gFilterBy.toLowerCase()))
-}
-
 // That function return stickers for display
 function getStickers() {
     return gStickers
-}
-
-// That function return keywords for display
-function getKeywords() {
-    return gKeywords
 }
 
 // That function set the first second lines position
@@ -130,11 +97,6 @@ function setFirstLinesPos(firstLinePos, secLinePos) {
     gMeme.lines[0].pos.y = firstLinePos.y
     gMeme.lines[1].pos.x = secLinePos.x
     gMeme.lines[1].pos.y = secLinePos.y
-}
-
-// That function get the img by user selected id
-function getSelectedImg() {
-    return gImgs.find(img => img.id === gMeme.selectedImgId)
 }
 
 // That function set the sticker / remove the sticker 
@@ -151,11 +113,6 @@ function setSelectedSticker(stickerId) {
     gMeme.stickersOnMeme.push(sticker)
 }
 
-// That function get selected img by img id
-function setSelectedImg(imgId) {
-    gMeme.selectedImgId = +imgId
-}
-
 // That function get the line by user selected index
 function getSelectedLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
@@ -165,15 +122,15 @@ function getSelectedLine() {
 function setLineTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
-
-// That function update text size
-function updateTxtSize(diff) {
-    gMeme.lines[gMeme.selectedLineIdx].size += diff
-}
-
-// That function update text align on canvas
-function updateTxtAlign(align) {
-    gMeme.lines[gMeme.selectedLineIdx].align = align
+// That function update line property by value
+function updateTxtProp(prop,val){
+  if(prop === 'align'){
+      // prop is align
+      gMeme.lines[gMeme.selectedLineIdx][prop] = val
+  }else{
+      // prop is size
+    gMeme.lines[gMeme.selectedLineIdx][prop] += (+val)
+  }
 }
 
 // That function update text font
@@ -219,16 +176,6 @@ function setSelectedLine(lineIdx){
     gMeme.selectedLineIdx = lineIdx
 }
 
-// That function set imgs filter
-function setImgsFilter(txt) {
-    gFilterBy = txt
-}
-
-// That function update the keyword
-function updateKeyword(txt) {
-    gKeywords[txt.toLowerCase()]++
-}
-
 // That function reset the selected line
 function resetSelectedLine(){
     gMeme.lines.forEach((line, idx) => {
@@ -241,7 +188,7 @@ function checkStickerOnMeme(sticker){
     return gMeme.stickersOnMeme.some(currSticker => sticker.id === currSticker.id)
 }
 
-// That function save meme img to storage
+// That function save meme to storage
 function saveMemeToStorage(currMeme){
     var memes  = loadFromStorage(MEME_DB_KEY)
     if(!memes || memes === null){
